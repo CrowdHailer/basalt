@@ -1,6 +1,9 @@
 # Basalt
 
-**TODO: Add description**
+**Basalt is all the goodness of dedicated value objects ready to go**
+
+This project is an experiment to see the value that can be had by using specific value types.
+It is an evolution of [Typetanic](https://github.com/CrowdHailer/typetanic), a similar project for Ruby.
 
 ## Installation
 
