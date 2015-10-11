@@ -14,4 +14,8 @@ defmodule Basalt.EmailAddressTest do
   test "can get top level domain", %{email_address: email_address} do
     assert "com" = email_address.top_level_domain
   end
+
+  test "can get local part", %{email_address: email_address} do
+    assert "test" = email_address.local_part
+  end
 end
