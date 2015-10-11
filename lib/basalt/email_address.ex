@@ -70,4 +70,14 @@ defmodule Basalt.EmailAddress do
   def domains({__MODULE__, email_address}) do
     domains(email_address)
   end
+
+  def to_string({__MODULE__, email_address}) do
+    String.Chars.to_string(email_address)
+  end
+end
+
+defimpl String.Chars, for: Basalt.EmailAddress do
+  def to_string(email_address) do
+    Basalt.EmailAddress.local_part(email_address) <> "@" <> Basalt.EmailAddress.hostname(email_address)
+  end
 end
