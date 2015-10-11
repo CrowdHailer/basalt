@@ -58,4 +58,16 @@ defmodule Basalt.EmailAddress do
   def local_part({__MODULE__, email_address}) do
     local_part(email_address)
   end
+
+  @doc """
+  iex> %EmailAddress{domains: ["com", "example"], local_part: "test"} |> EmailAddress.domains
+  ["com", "example"]
+  """
+  def domains(%__MODULE__{domains: domains}) do
+    domains
+  end
+
+  def domains({__MODULE__, email_address}) do
+    domains(email_address)
+  end
 end

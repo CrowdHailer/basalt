@@ -18,4 +18,8 @@ defmodule Basalt.EmailAddressTest do
   test "can get local part", %{email_address: email_address} do
     assert "test" = email_address.local_part
   end
+
+  test "can get domains", %{email_address: email_address} do
+    assert ["com", "example"] = email_address.domains
+  end
 end
