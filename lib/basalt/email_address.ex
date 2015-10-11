@@ -4,8 +4,8 @@ defmodule Basalt.EmailAddress do
 
   iex> alias Basalt.EmailAddress
   nil
-  iex> "test@example.com" |> EmailAddress.parse! |> EmailAddress.hostname
-  "example.com"
+  iex> example_email = "test@example.com" |> EmailAddress.parse!
+  %EmailAddress{domains: ["com", "example"], local_part: "test"}
   """
 
   defstruct local_part: nil, domains: []
@@ -17,9 +17,33 @@ defmodule Basalt.EmailAddress do
     __MODULE__ |> struct local_part: local_part, domains: domains
   end
 
+  def new(raw) do
+    {__MODULE__, parse!(raw)}
+  end
+
+  @doc """
+  iex> %EmailAddress{domains: ["com", "example"], local_part: "test"} |> EmailAddress.hostname
+  "example.com"
+  """
   def hostname(%__MODULE__{domains: domains}) do
     domains
     |> Enum.reverse
     |> Enum.join(".")
+  end
+
+  def hostname({__MODULE__, email_address}) do
+    hostname(email_address)
+  end
+
+  @doc """
+  iex> %EmailAddress{domains: ["com", "example"], local_part: "test"} |> EmailAddress.top_level_domain
+  "com"
+  """
+  def top_level_domain(%__MODULE__{domains: [tld | _rest]}) do
+    tld
+  end
+
+  def top_level_domain({__MODULE__, email_address}) do
+    top_level_domain(email_address)
   end
 end
